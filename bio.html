@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يوسف الأحمر | مطور مواقع ويب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 50%, #e6f7ff 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* خطوط متحركة ناعمة في الخلفية */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(74, 144, 226, 0.05);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            left: 85%;
+            animation-delay: 4s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(5deg); 
+                opacity: 0.9;
+            }
+        }
+        
+        .profile-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 
+                0 10px 30px rgba(116, 127, 145, 0.1),
+                0 1px 8px rgba(116, 127, 145, 0.05);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            text-align: center;
+            padding: 50px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #4a90e2, #63b3ed);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            color: white;
+            position: relative;
+            animation: gentle-float 8s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+        
+        .name {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2c5282;
+            letter-spacing: -0.5px;
+        }
+        
+        .title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            color: #718096;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 25%;
+            right: 25%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #4a90e2, transparent);
+        }
+        
+        .contact-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #4a5568;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 5px 15px rgba(116, 127, 145, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+            transition: 0.6s;
+        }
+        
+        .icon-btn:hover::before {
+            left: 100%;
+        }
+        
+        .icon-btn:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 20px rgba(116, 127, 145, 0.15);
+            border-color: rgba(74, 144, 226, 0.3);
+            color: #4a90e2;
+        }
+        
+        .icon-label {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #718096;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .icon-container:hover .icon-label {
+            color: #4a90e2;
+        }
+        
+        /* خطوط متحركة ناعمة */
+        .floating-line {
+            position: absolute;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 2px;
+            animation: line-float 12s ease-in-out infinite;
+        }
+        
+        .floating-line:nth-child(1) {
+            width: 120px;
+            height: 2px;
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .floating-line:nth-child(2) {
+            width: 80px;
+            height: 2px;
+            top: 60%;
+            left: 90%;
+            animation-delay: 4s;
+        }
+        
+        .floating-line:nth-child(3) {
+            width: 100px;
+            height: 2px;
+            top: 85%;
+            left: 70%;
+            animation-delay: 8s;
+        }
+        
+        @keyframes line-float {
+            0%, 100% { 
+                transform: translateX(0) rotate(0deg); 
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translateX(20px) rotate(2deg); 
+                opacity: 0.8;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 40px 20px;
+            }
+            
+            .contact-icons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .icon-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .name {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        
+        <div class="floating-line"></div>
+        <div class="floating-line"></div>
+        <div class="floating-line"></div>
+    </div>
+    
+    <div class="profile-card">
+        <div class="profile-pic">
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <h1 class="name">يوسف الأحمر</h1>
+        <h2 class="title">Full-Stack Website Developer</h2>
+        <h3 class="subtitle">كاتب</h3>
+        
+        <div class="contact-icons">
+            <div class="icon-container">
+                <button class="icon-btn" onclick="window.location.href='mailto:alahmryousef@gmail.com'">
+                    <i class="fas fa-envelope"></i>
+                </button>
+                <div class="icon-label">Mail</div>
+            </div>
+            
+            <div class="icon-container">
+                <button class="icon-btn" onclick="window.open('tel:+966509620956')">
+                    <i class="fas fa-phone"></i>
+                </button>
+                <div class="icon-label">Call</div>
+            </div>
+            
+            <div class="icon-container">
+                <button class="icon-btn" onclick="window.open('https://wa.me/966509620956')">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <div class="icon-label">Whatsapp</div>
+            </div>
+            
+            <div class="icon-container">
+                <button class="icon-btn" onclick="window.open('https://www.instagram.com/yousef_alahmr/?utm_source=ig_web_button_share_sheet', '_blank')">
+                    <i class="fab fa-instagram"></i>
+                </button>
+                <div class="icon-label">instagram</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // إنشاء أشكال وخطوط عائمة إضافية
+        document.addEventListener('DOMContentLoaded', function() {
+            const shapesContainer = document.querySelector('.floating-shapes');
+            
+            // إضافة المزيد من الأشكال
+            for (let i = 0; i < 6; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+                shape.style.width = `${60 + Math.random() * 80}px`;
+                shape.style.height = shape.style.width;
+                shape.style.left = `${Math.random() * 90}%`;
+                shape.style.top = `${Math.random() * 90}%`;
+                shape.style.animationDelay = `${Math.random() * 8}s`;
+                shape.style.background = `rgba(74, 144, 226, ${0.02 + Math.random() * 0.03})`;
+                shapesContainer.appendChild(shape);
+            }
+            
+            // إضافة المزيد من الخطوط
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'floating-line';
+                line.style.width = `${40 + Math.random() * 100}px`;
+                line.style.height = '1px';
+                line.style.left = `${Math.random() * 90}%`;
+                line.style.top = `${Math.random() * 90}%`;
+                line.style.animationDelay = `${Math.random() * 12}s`;
+                line.style.background = `rgba(74, 144, 226, ${0.1 + Math.random() * 0.1})`;
+                shapesContainer.appendChild(line);
+            }
+            
+            // تأثير ظهور الأيقونات
+            const iconButtons = document.querySelectorAll('.icon-btn');
+            iconButtons.forEach((button, index) => {
+                button.style.opacity = '0';
+                button.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    button.style.transition = 'all 0.5s ease';
+                    button.style.opacity = '1';
+                    button.style.transform = 'translateY(0)';
+                }, 300 + (index * 150));
+            });
+        });
+    </script>
+</body>
+</html>
