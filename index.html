@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يوسف الأحمر</title>
+    <title>Yousef Alahmr</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -21,11 +21,10 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden;
+            overflow: auto;
             position: relative;
         }
         
-        /* خطوط متحركة ناعمة في الخلفية */
         .floating-shapes {
             position: absolute;
             width: 100%;
@@ -138,17 +137,13 @@
         }
         
         .title {
-            font-size: 22px;
-            font-weight: 600;
             color: #4a5568;
             margin-bottom: 12px;
             letter-spacing: 0.5px;
         }
         
         .subtitle {
-            font-size: 18px;
-            font-weight: 500;
-            color: #718096;
+            color: #4a5568;
             margin-bottom: 40px;
             position: relative;
             display: inline-block;
@@ -230,7 +225,6 @@
             color: #4a90e2;
         }
         
-        /* خطوط متحركة ناعمة */
         .floating-line {
             position: absolute;
             background: rgba(74, 144, 226, 0.1);
@@ -313,6 +307,7 @@
         </div>
         <h1 class="name">يوسف الأحمر</h1>
         <h2 class="title">Full-Stack Website Developer</h2>
+        <h3 class="title2">Graphic Designer</h3>
         <h3 class="subtitle">كاتب</h3>
         
         <div class="contact-icons">
@@ -347,11 +342,9 @@
     </div>
 
     <script>
-        // إنشاء أشكال وخطوط عائمة إضافية
         document.addEventListener('DOMContentLoaded', function() {
             const shapesContainer = document.querySelector('.floating-shapes');
             
-            // إضافة المزيد من الأشكال
             for (let i = 0; i < 6; i++) {
                 const shape = document.createElement('div');
                 shape.className = 'shape';
@@ -377,7 +370,6 @@
                 shapesContainer.appendChild(line);
             }
             
-            // تأثير ظهور الأيقونات
             const iconButtons = document.querySelectorAll('.icon-btn');
             iconButtons.forEach((button, index) => {
                 button.style.opacity = '0';
@@ -392,5 +384,4 @@
         });
     </script>
 </body>
-
 </html>
