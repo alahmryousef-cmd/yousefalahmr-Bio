@@ -1,236 +1,353 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yousef Alahmr</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            color: #f8fafc;
+            background: linear-gradient(160deg, #1f140d 0%, #2b1d14 35%, #3d2a1c 70%, #4a3424 100%);
+            color: #f5ede0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow: auto;
+            padding: 30px 20px;
             position: relative;
+            overflow-x: hidden;
         }
-        
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+
+        /* ====== الخلفية الزخرفية ====== */
+        .bg-decoration {
+            position: fixed;
+            inset: 0;
             z-index: 1;
             overflow: hidden;
+            pointer-events: none;
         }
-        
-        .shape {
+
+        .blob {
             position: absolute;
             border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+            filter: blur(90px);
+            opacity: 0.28;
+            animation: blob-float 18s ease-in-out infinite;
         }
-        
-        .shape:nth-child(1) {
-            width: 150px;
-            height: 150px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+
+        .blob:nth-child(1) { width: 380px; height: 380px; background: #8a6a45; top: -120px; left: -120px; animation-delay: 0s; }
+        .blob:nth-child(2) { width: 320px; height: 320px; background: #6b5033; bottom: -120px; right: -120px; animation-delay: 5s; }
+        .blob:nth-child(3) { width: 260px; height: 260px; background: #a8855c; top: 45%; right: 8%; animation-delay: 9s; }
+        .blob:nth-child(4) { width: 240px; height: 240px; background: #7a5c3d; bottom: 15%; left: 3%; animation-delay: 7s; }
+
+        @keyframes blob-float {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(28px,-28px) scale(1.06); }
+            66% { transform: translate(-18px,18px) scale(0.96); }
         }
-        
-        .shape:nth-child(2) {
-            width: 100px;
-            height: 100px;
-            top: 70%;
-            left: 80%;
-            animation-delay: 2s;
+
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(224, 196, 138, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(224, 196, 138, 0.9);
+            animation: twinkle 4s ease-in-out infinite;
         }
-        
-        .shape:nth-child(3) {
-            width: 120px;
-            height: 120px;
-            top: 40%;
-            left: 85%;
-            animation-delay: 4s;
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; transform: scale(0.7); }
+            50% { opacity: 0.9; transform: scale(1.2); }
         }
-        
-        .shape:nth-child(4) {
-            width: 80px;
-            height: 80px;
-            top: 80%;
-            left: 15%;
-            animation-delay: 6s;
+
+        .floating-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(201,168,106,0.35), transparent);
+            height: 1px;
+            border-radius: 2px;
+            animation: line-float 14s ease-in-out infinite;
         }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-                opacity: 0.7;
-            }
-            50% { 
-                transform: translateY(-20px) rotate(5deg); 
-                opacity: 0.9;
-            }
+
+        @keyframes line-float {
+            0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translateX(25px) rotate(1.5deg); opacity: 0.85; }
         }
-        
+
+        /* ====== البطاقة ====== */
         .profile-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(15px);
-            border-radius: 24px;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.3),
-                0 1px 8px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 500px;
-            overflow: hidden;
-            text-align: center;
-            padding: 50px 30px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
             position: relative;
             z-index: 10;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.4),
-                0 5px 15px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 60px;
-            color: white;
-            position: relative;
-            animation: gentle-float 8s ease-in-out infinite;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-            border: 3px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        @keyframes gentle-float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
-        }
-        
-        .name {
-            font-size: 38px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-        }
-        
-        .title {
-            color: #cbd5e1;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-            position: relative;
-            display: inline-block;
-            padding: 0 10px;
-        }
-        
-        .title::before, .title::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 20px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #6366f1);
-        }
-        
-        .title::before {
-            right: 100%;
-        }
-        
-        .title::after {
-            left: 100%;
-            background: linear-gradient(to left, transparent, #6366f1);
-        }
-        
-        .titles-container {
+            width: 100%;
+            max-width: 620px;
+            background: rgba(43, 29, 20, 0.72);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 42px;
+            padding: 45px 45px 40px;
+            text-align: center;
+            box-shadow:
+                0 24px 55px rgba(0, 0, 0, 0.5),
+                0 8px 18px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(232, 220, 200, 0.12);
+            border: 1px solid rgba(201, 168, 106, 0.25);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: card-appear 0.9s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 30px;
         }
-        
-        .subtitle {
-            color: #94a3b8;
+
+        @keyframes card-appear {
+            from { opacity: 0; transform: translateY(35px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 32px 70px rgba(0, 0, 0, 0.55),
+                0 12px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(232, 220, 200, 0.15);
+        }
+
+        /* ====== صورة البروفايل ====== */
+        .avatar-wrapper {
+            position: relative;
+            width: 155px;
+            height: 155px;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #c9a86a, #e0c48a, #8a6a45, #c9a86a);
+            animation: ring-spin 14s linear infinite;
+            filter: blur(1.5px);
+            opacity: 0.85;
+        }
+
+        .avatar-ring::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border-radius: 50%;
+            background: rgba(43, 29, 20, 0.9);
+        }
+
+        @keyframes ring-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-pic {
+            position: absolute;
+            inset: 4px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #5a4030, #3d2a1c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 58px;
+            color: #e0c48a;
+            z-index: 2;
+            box-shadow: inset 0 3px 12px rgba(0,0,0,0.35);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ====== الاسم ====== */
+        .name {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e0c48a 0%, #c9a86a 50%, #d9c5b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+
+        /* ====== الأدوار ====== */
+        .roles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 26px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* حاوية كل دور مع الفاصل الخاص بيه */
+        .role-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 4px;
+        }
+
+        /* الوصف الرئيسي - Front-End Web Developer */
+        .role-main {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: #e0c48a;
+            width: 100%;
+            text-align: center;
+            line-height: 1.4;
+            transition: letter-spacing 0.35s ease;
+        }
+
+        .role-main:hover {
+            letter-spacing: 4px;
+        }
+
+        /* السطر الثانوي - with Extensive Full-Stack Development Experience */
+        .role-sub {
+            font-size: 11.5px;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            text-transform: capitalize;
+            color: #c9b299;
+            width: 100%;
+            text-align: center;
+            line-height: 1.5;
+            padding: 0 10px;
+            max-width: 440px;
+            transition: color 0.35s ease;
+            font-style: italic;
+        }
+
+        .role-sub:hover {
+            color: #d9c5b0;
+        }
+
+        /* الأدوار الإضافية */
+        .role {
+            font-size: 12px;
             font-weight: 400;
-            font-size: 18px;
-            padding: 8px 20px;
-            border-radius: 20px;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-            width: 80%;
-            max-width: 280px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d9c5b0;
+            width: 100%;
+            padding: 2px 8px;
+            border-radius: 6px;
+            transition: all 0.35s ease;
+            text-align: center;
+            line-height: 1.4;
         }
-        
-        .subtitle:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
-            color: #e2e8f0;
+
+        .role:hover {
+            color: #e0c48a;
+            background: rgba(201, 168, 106, 0.06);
+            letter-spacing: 3.5px;
         }
-        
-        .contact-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 40px;
+
+        /* فاصل صغير بين كل دور واللي بعده */
+        .role-separator {
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 106, 0.5), transparent);
+            margin: 4px auto 0;
         }
-        
+
+        /* ====== الفاصل الرئيسي ====== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .divider-line {
+            width: 50px;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, #c9a86a, transparent);
+            border-radius: 2px;
+        }
+
+        .divider-diamond {
+            color: #c9a86a;
+            font-size: 11px;
+            transform: rotate(45deg);
+            animation: diamond-pulse 3.5s ease-in-out infinite;
+        }
+
+        @keyframes diamond-pulse {
+            0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.7; }
+            50% { transform: rotate(45deg) scale(1.3); opacity: 1; }
+        }
+
+        /* ====== الأيقونات ====== */
+        .icons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 40px;
+            flex-shrink: 0;
+        }
+
+        .icons-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
         .icon-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 10px;
         }
-        
+
         .icon-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
-            background: rgba(30, 41, 59, 0.8);
-            color: #cbd5e1;
+            position: relative;
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            border: 1px solid rgba(201, 168, 106, 0.3);
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 28px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
+            color: #e8dcc8;
+            background: rgba(61, 42, 28, 0.75);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(232, 220, 200, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
+            padding: 0;
         }
-        
+
         .icon-btn::before {
             content: '';
             position: absolute;
@@ -238,238 +355,406 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
-            transition: 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 106, 0.25), transparent);
+            transition: left 0.7s;
         }
-        
-        .icon-btn:hover::before {
-            left: 100%;
-        }
-        
+
+        .icon-btn:hover::before { left: 100%; }
+
         .icon-btn:hover {
-            transform: translateY(-5px);
-            background: rgba(30, 41, 59, 1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: rgba(99, 102, 241, 0.5);
-            color: #6366f1;
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(135deg, #5a4030, #3d2a1c);
+            color: #e0c48a;
+            border-color: rgba(224, 196, 138, 0.6);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(201, 168, 106, 0.2), inset 0 1px 0 rgba(232, 220, 200, 0.15);
         }
-        
+
+        .icon-btn:active { transform: translateY(-2px) scale(0.98); }
+
         .icon-label {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #94a3b8;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.7px;
+            color: #d9c5b0;
             transition: color 0.3s ease;
         }
-        
-        .icon-container:hover .icon-label {
-            color: #6366f1;
-        }
-        
-        .floating-line {
-            position: absolute;
-            background: rgba(99, 102, 241, 0.2);
-            border-radius: 2px;
-            animation: line-float 12s ease-in-out infinite;
-        }
-        
-        .floating-line:nth-child(1) {
-            width: 120px;
-            height: 2px;
-            top: 20%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        
-        .floating-line:nth-child(2) {
-            width: 80px;
-            height: 2px;
-            top: 60%;
-            left: 90%;
-            animation-delay: 4s;
-        }
-        
-        .floating-line:nth-child(3) {
-            width: 100px;
-            height: 2px;
-            top: 85%;
-            left: 70%;
-            animation-delay: 8s;
-        }
-        
-        @keyframes line-float {
-            0%, 100% { 
-                transform: translateX(0) rotate(0deg); 
-                opacity: 0.5;
-            }
-            50% { 
-                transform: translateX(20px) rotate(2deg); 
-                opacity: 0.8;
-            }
-        }
-        
-        .glow-effect {
-            position: absolute;
+
+        .icon-container:hover .icon-label { color: #e0c48a; }
+
+        /* ====== قسم Inspire ====== */
+        .inspire-section {
+            display: block;
             width: 100%;
-            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e6e6e6 100%);
+            border-radius: 20px;
+            padding: 16px 28px;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(201, 168, 106, 0.4);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inspire-section::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            border-radius: 24px;
-            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.1), transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 106, 0.7), transparent);
         }
-        
-        @media (max-width: 480px) {
+
+        .inspire-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .inspire-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .inspire-logo {
+            width: 78px;
+            height: 78px;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+        }
+
+        .inspire-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .inspire-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            gap: 3px;
+        }
+
+        .inspire-title {
+            font-size: 15.5px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            color: #2b1d14;
+            line-height: 1.2;
+        }
+
+        .inspire-subtitle {
+            font-size: 12.5px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #5a4030;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        /* ====== الجوال ====== */
+        @media (max-width: 700px) {
+            body { padding: 20px 14px; }
+
             .profile-card {
-                padding: 40px 20px;
+                max-width: 100%;
+                padding: 35px 30px 32px;
+                border-radius: 32px;
             }
-            
-            .contact-icons {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .icon-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            .name {
-                font-size: 32px;
-            }
-            
-            .titles-container {
-                gap: 10px;
-            }
-            
-            .subtitle {
-                width: 90%;
-                font-size: 16px;
-            }
+
+            .avatar-wrapper { width: 125px; height: 125px; margin-bottom: 20px; }
+            .profile-pic { font-size: 48px; }
+            .name { font-size: 23px; letter-spacing: 1.4px; margin-bottom: 16px; }
+
+            .role-main { font-size: 12.5px; letter-spacing: 2.8px; }
+            .role-sub { font-size: 10px; letter-spacing: 1.2px; max-width: 360px; }
+            .role { font-size: 10.5px; letter-spacing: 2.5px; }
+            .roles { gap: 10px; margin-bottom: 22px; }
+
+            .divider { margin-bottom: 28px; }
+            .divider-line { width: 42px; }
+
+            .icons-grid { gap: 24px; margin-bottom: 32px; }
+            .icons-row { gap: 30px; }
+            .icon-btn { width: 62px; height: 62px; font-size: 24px; border-radius: 19px; }
+            .icon-label { font-size: 10.5px; }
+
+            .inspire-section { padding: 14px 22px; border-radius: 17px; }
+            .inspire-content { gap: 18px; }
+            .inspire-logo { width: 66px; height: 66px; border-radius: 16px; }
+            .inspire-title { font-size: 13.5px; }
+            .inspire-subtitle { font-size: 11px; letter-spacing: 1.2px; }
+        }
+
+        @media (max-width: 480px) {
+            .profile-card { padding: 28px 22px 26px; border-radius: 28px; }
+            .avatar-wrapper { width: 108px; height: 108px; margin-bottom: 16px; }
+            .profile-pic { font-size: 42px; }
+            .name { font-size: 20px; letter-spacing: 1.2px; margin-bottom: 14px; }
+
+            .role-main { font-size: 11px; letter-spacing: 2.3px; }
+            .role-sub { font-size: 9px; letter-spacing: 1px; max-width: 300px; padding: 0 5px; }
+            .role { font-size: 9.5px; letter-spacing: 2.2px; }
+            .roles { gap: 8px; margin-bottom: 18px; }
+
+            .divider { margin-bottom: 24px; }
+            .divider-line { width: 36px; }
+
+            .icons-grid { gap: 20px; margin-bottom: 26px; }
+            .icons-row { gap: 22px; }
+            .icon-btn { width: 54px; height: 54px; font-size: 22px; border-radius: 17px; }
+            .icon-label { font-size: 9.5px; }
+
+            .inspire-section { padding: 12px 18px; border-radius: 15px; }
+            .inspire-content { gap: 15px; }
+            .inspire-logo { width: 58px; height: 58px; border-radius: 14px; }
+            .inspire-title { font-size: 12px; }
+            .inspire-subtitle { font-size: 10px; letter-spacing: 1px; }
+        }
+
+        @media (max-width: 380px) {
+            .profile-card { padding: 22px 18px 20px; border-radius: 24px; }
+            .avatar-wrapper { width: 92px; height: 92px; margin-bottom: 14px; }
+            .profile-pic { font-size: 36px; }
+            .name { font-size: 17px; letter-spacing: 1px; margin-bottom: 12px; }
+
+            .role-main { font-size: 9.5px; letter-spacing: 2px; }
+            .role-sub { font-size: 8px; letter-spacing: 0.8px; max-width: 260px; padding: 0; }
+            .role { font-size: 8.5px; letter-spacing: 2px; }
+            .roles { gap: 6px; margin-bottom: 16px; }
+            .role-separator { width: 24px; margin: 3px auto 0; }
+
+            .divider { margin-bottom: 20px; }
+            .divider-line { width: 30px; }
+
+            .icons-grid { gap: 16px; margin-bottom: 22px; }
+            .icons-row { gap: 18px; }
+            .icon-btn { width: 46px; height: 46px; font-size: 19px; border-radius: 15px; }
+            .icon-label { font-size: 8.5px; }
+
+            .inspire-section { padding: 10px 14px; border-radius: 13px; }
+            .inspire-content { gap: 12px; }
+            .inspire-logo { width: 50px; height: 50px; border-radius: 12px; }
+            .inspire-title { font-size: 10.5px; }
+            .inspire-subtitle { font-size: 8.5px; letter-spacing: 0.9px; }
+        }
+
+        @media (min-width: 1000px) {
+            .profile-card { max-width: 640px; padding: 50px 50px 45px; }
+            .avatar-wrapper { width: 165px; height: 165px; margin-bottom: 26px; }
+            .profile-pic { font-size: 62px; }
+            .name { font-size: 32px; margin-bottom: 22px; }
+
+            .role-main { font-size: 16.5px; letter-spacing: 4px; }
+            .role-sub { font-size: 13px; letter-spacing: 1.8px; max-width: 480px; }
+            .role { font-size: 13px; letter-spacing: 3.5px; }
+            .roles { gap: 14px; margin-bottom: 28px; }
+
+            .divider { margin-bottom: 38px; }
+
+            .icons-grid { gap: 34px; margin-bottom: 44px; }
+            .icons-row { gap: 46px; }
+            .icon-btn { width: 78px; height: 78px; font-size: 30px; border-radius: 24px; }
+            .icon-label { font-size: 12.5px; }
+
+            .inspire-section { padding: 18px 32px; border-radius: 22px; }
+            .inspire-content { gap: 26px; }
+            .inspire-logo { width: 88px; height: 88px; border-radius: 20px; }
+            .inspire-title { font-size: 17px; }
+            .inspire-subtitle { font-size: 13.5px; letter-spacing: 1.7px; }
         }
     </style>
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        
-        <div class="floating-line"></div>
-        <div class="floating-line"></div>
-        <div class="floating-line"></div>
+    <div class="bg-decoration">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
     </div>
-    
+
     <div class="profile-card">
-        <div class="glow-effect"></div>
-        <div class="profile-pic">
-            <i class="fas fa-laptop-code"></i>
+        <!-- صورة البروفايل -->
+        <div class="avatar-wrapper">
+            <div class="avatar-ring"></div>
+            <div class="profile-pic">
+                <img src="joo.png" alt="Yousef Alahmr">
+            </div>
         </div>
+
+        <!-- الاسم -->
         <h1 class="name">Yousef Alahmr</h1>
-        <h2 class="title">Full-stack Website Developer</h2>
-        
-        <div class="titles-container">
-            <div class="subtitle">Graphic Designer</div>
-            <div class="subtitle">Author - Writer</div>
-        </div>
-        
-        <div class="contact-icons">
-            <div class="icon-container">
-                <button class="icon-btn" onclick="window.location.href='mailto:alahmryousef@gmail.com'">
-                    <i class="fas fa-envelope"></i>
-                </button>
-                <div class="icon-label">Mail</div>
-            </div>
-            
-            <div class="icon-container">
-                <button class="icon-btn" onclick="window.open('tel:+966509620956')">
-                    <i class="fas fa-phone"></i>
-                </button>
-                <div class="icon-label">Call</div>
-            </div>
-            
-            <div class="icon-container">
-                <button class="icon-btn" onclick="window.open('https://wa.me/966509620956')">
-                    <i class="fab fa-whatsapp"></i>
-                </button>
-                <div class="icon-label">Whatsapp</div>
+
+        <!-- الأدوار -->
+        <div class="roles">
+            <!-- الدور الأول: Front-End + Full-Stack -->
+            <div class="role-block">
+                <div class="role-main">Front-End Web Developer</div>
+                <div class="role-sub">with Extensive Full-Stack Development Experience</div>
             </div>
 
-            <div class="icon-container">
-                <button class="icon-btn" onclick="window.open('https://www.linkedin.com/in/yousef-alahmr-66206b380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', '_blank')">
-                    <i class="fab fa-linkedin"></i>
-                </button>
-                <div class="icon-label">LinkedIn</div>
+            <div class="role-separator"></div>
+
+            <!-- الدور الثاني: Graphic Designer -->
+            <div class="role-block">
+                <div class="role">Graphic Designer</div>
             </div>
 
-            
-            <div class="icon-container">
-                <button class="icon-btn" onclick="window.open('https://www.instagram.com/yousef_alahmr/', '_blank')">
-                    <i class="fab fa-instagram"></i>
-                </button>
-                <div class="icon-label">instagram</div>
+            <div class="role-separator"></div>
+
+            <!-- الدور الثالث: Author - Writer -->
+            <div class="role-block">
+                <div class="role">Author - Writer</div>
             </div>
         </div>
+
+        <!-- الفاصل الرئيسي -->
+        <div class="divider">
+            <span class="divider-line"></span>
+            <i class="fas fa-gem divider-diamond"></i>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- الأيقونات -->
+        <div class="icons-grid">
+            <!-- الصف الأول -->
+            <div class="icons-row top">
+                <div class="icon-container">
+                    <button class="icon-btn" onclick="window.open('https://www.instagram.com/yousef_alahmr/?utm_source=ig_web_button_share_sheet', '_blank')">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+                    <div class="icon-label">Instagram</div>
+                </div>
+
+                <div class="icon-container">
+                    <button class="icon-btn" onclick="window.open('https://wa.me/966509620956')">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                    <div class="icon-label">WhatsApp</div>
+                </div>
+            </div>
+
+            <!-- الصف الثاني -->
+            <div class="icons-row bottom">
+                <div class="icon-container">
+                    <button class="icon-btn" onclick="window.location.href='mailto:alahmryousef@gmail.com'">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <div class="icon-label">Email</div>
+                </div>
+
+                <div class="icon-container">
+                    <button class="icon-btn" onclick="window.open('https://www.linkedin.com/in/yousef-alahmr-66206b380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', '_blank')">
+                        <i class="fab fa-linkedin"></i>
+                    </button>
+                    <div class="icon-label">LinkedIn</div>
+                </div>
+
+                <div class="icon-container">
+                    <button class="icon-btn" onclick="window.open('tel:+966509620956')">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <div class="icon-label">Call</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم Inspire -->
+        <a href="https://linktr.ee/InspireTm" target="_blank" class="inspire-section">
+            <div class="inspire-content">
+                <div class="inspire-logo">
+                    <img src="inspire.png" alt="Inspire Team">
+                </div>
+                <div class="inspire-text">
+                    <div class="inspire-title">Founder & Team Leader</div>
+                    <div class="inspire-subtitle">Inspire Team</div>
+                </div>
+            </div>
+        </a>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const shapesContainer = document.querySelector('.floating-shapes');
-            
-            for (let i = 0; i < 6; i++) {
-                const shape = document.createElement('div');
-                shape.className = 'shape';
-                shape.style.width = `${60 + Math.random() * 80}px`;
-                shape.style.height = shape.style.width;
-                shape.style.left = `${Math.random() * 90}%`;
-                shape.style.top = `${Math.random() * 90}%`;
-                shape.style.animationDelay = `${Math.random() * 8}s`;
-                shape.style.background = `radial-gradient(circle, rgba(99, 102, 241, ${0.1 + Math.random() * 0.1}) 0%, rgba(99, 102, 241, 0) 70%)`;
-                shapesContainer.appendChild(shape);
+            const decoration = document.querySelector('.bg-decoration');
+
+            for (let i = 0; i < 18; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 4}s`;
+                sparkle.style.width = `${2 + Math.random() * 2.5}px`;
+                sparkle.style.height = sparkle.style.width;
+                decoration.appendChild(sparkle);
             }
-            
-            // إضافة المزيد من الخطوط
-            for (let i = 0; i < 5; i++) {
+
+            for (let i = 0; i < 8; i++) {
                 const line = document.createElement('div');
                 line.className = 'floating-line';
-                line.style.width = `${40 + Math.random() * 100}px`;
-                line.style.height = '1px';
+                line.style.width = `${50 + Math.random() * 130}px`;
                 line.style.left = `${Math.random() * 90}%`;
                 line.style.top = `${Math.random() * 90}%`;
-                line.style.animationDelay = `${Math.random() * 12}s`;
-                line.style.background = `rgba(99, 102, 241, ${0.1 + Math.random() * 0.1})`;
-                shapesContainer.appendChild(line);
+                line.style.animationDelay = `${Math.random() * 14}s`;
+                decoration.appendChild(line);
             }
-            
-            const iconButtons = document.querySelectorAll('.icon-btn');
-            iconButtons.forEach((button, index) => {
-                button.style.opacity = '0';
-                button.style.transform = 'translateY(20px)';
-                
+
+            const icons = document.querySelectorAll('.icon-container');
+            icons.forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(15px)';
                 setTimeout(() => {
-                    button.style.transition = 'all 0.5s ease';
-                    button.style.opacity = '1';
-                    button.style.transform = 'translateY(0)';
-                }, 300 + (index * 150));
+                    el.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 500 + i * 120);
             });
-            
-            // إضافة تأثير ظهور للعناوين الفرعية
-            const subtitles = document.querySelectorAll('.subtitle');
-            subtitles.forEach((subtitle, index) => {
-                subtitle.style.opacity = '0';
-                subtitle.style.transform = 'translateY(10px)';
-                
+
+            const roles = document.querySelectorAll('.role-main, .role-sub, .role');
+            roles.forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
                 setTimeout(() => {
-                    subtitle.style.transition = 'all 0.5s ease';
-                    subtitle.style.opacity = '1';
-                    subtitle.style.transform = 'translateY(0)';
-                }, 600 + (index * 200));
+                    el.style.transition = 'all 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 350 + i * 130);
             });
+
+            const inspireSection = document.querySelector('.inspire-section');
+            if (inspireSection) {
+                inspireSection.style.opacity = '0';
+                inspireSection.style.transform = 'translateY(15px)';
+                setTimeout(() => {
+                    inspireSection.style.transition = 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    inspireSection.style.opacity = '1';
+                    inspireSection.style.transform = 'translateY(0)';
+                }, 1200);
+            }
         });
+
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
-
